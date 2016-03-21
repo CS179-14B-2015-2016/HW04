@@ -1,0 +1,164 @@
+# depslib dependency file v1.0
+1458567315 source:c:\users\gian\desktop\hw04\hw03-master\basicenemybullet.cpp
+	"BasicEnemyBullet.h"
+	"BulletStage.h"
+	"Vector2Plus.h"
+
+1458567315 c:\users\gian\desktop\hw04\hw03-master\basicenemybullet.h
+	"EnemyBullet.h"
+	"StraightMovement.h"
+	<SFML/Graphics.hpp>
+
+1458558257 c:\users\gian\desktop\hw04\hw03-master\enemybullet.h
+	"Entity.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\entity.h
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+	"MoveBehavior.h"
+	"ShootBehavior.h"
+	<iostream>
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\vector2plus.h
+	<SFML/System.hpp>
+	<cmath>
+
+1458559939 c:\users\gian\desktop\hw04\hw03-master\movebehavior.h
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\shootbehavior.h
+
+1458559939 c:\users\gian\desktop\hw04\hw03-master\straightmovement.h
+	"MoveBehavior.h"
+
+1458561503 c:\users\gian\desktop\hw04\hw03-master\bulletstage.h
+	<vector>
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+	"Player.h"
+	"PlayerBullet.h"
+	"EnemyBullet.h"
+	"Enemy.h"
+
+1458558257 c:\users\gian\desktop\hw04\hw03-master\player.h
+	"Entity.h"
+	"PlayerMove.h"
+	"PlayerShoot.h"
+
+1458559939 c:\users\gian\desktop\hw04\hw03-master\playermove.h
+	"MoveBehavior.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\playershoot.h
+	"ShootBehavior.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\playerbullet.h
+	"Entity.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\enemy.h
+	"Entity.h"
+	"EnemyShoot.h"
+	"BasicEnemyMove.h"
+
+1458554497 c:\users\gian\desktop\hw04\hw03-master\enemyshoot.h
+	"ShootBehavior.h"
+
+1458560608 c:\users\gian\desktop\hw04\hw03-master\basicenemymove.h
+	"MoveBehavior.h"
+	"Vector2Plus.h"
+
+1458576724 source:c:\users\gian\desktop\hw04\hw03-master\basicenemymove.cpp
+	"BasicEnemyMove.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+	<algorithm>
+
+1458555019 source:c:\users\gian\desktop\hw04\hw03-master\basicplayerbullet.cpp
+	"BasicPlayerBullet.h"
+	"BulletStage.h"
+	"Vector2Plus.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\basicplayerbullet.h
+	"PlayerBullet.h"
+	"StraightMovement.h"
+	<SFML/Graphics.hpp>
+
+1458555019 source:c:\users\gian\desktop\hw04\hw03-master\bulletstage.cpp
+	"BulletStage.h"
+	<cmath>
+	<iostream>
+
+1458561846 source:c:\users\gian\desktop\hw04\hw03-master\enemy.cpp
+	"Enemy.h"
+	"BulletStage.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\gamestate.cpp
+	"StateSubclass.h"
+	<iostream>
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\statesubclass.h
+	"StateManager.h"
+	"BulletStage.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\statemanager.h
+	<vector>
+	"State.h"
+	"Vector2Plus.h"
+
+1457956678 c:\users\gian\desktop\hw04\hw03-master\state.h
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+
+1458558257 source:c:\users\gian\desktop\hw04\hw03-master\mainloop.cpp
+	"StateSubclass.h"
+	"Vector2Plus.h"
+	<iostream>
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\player.cpp
+	"Player.h"
+	"BulletStage.h"
+	"PlayerMove.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\playermove.cpp
+	"PlayerMove.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\playershoot.cpp
+	"BasicPlayerBullet.h"
+	"PlayerShoot.h"
+	"BulletStage.h"
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\splashstate.cpp
+	"StateSubclass.h"
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\state.cpp
+	"StateManager.h"
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\statemanager.cpp
+	"StateManager.h"
+	<cassert>
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\straightmovement.cpp
+	"StraightMovement.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+
+1457956678 source:c:\users\gian\desktop\hw04\hw03-master\vector2plus.cpp
+	"Vector2Plus.h"
+
+1458576704 source:c:\users\gian\desktop\hw04\hw03-master\enemyshoot.cpp
+	"BasicEnemyBullet.h"
+	"EnemyShoot.h"
+	"BulletStage.h"
+
