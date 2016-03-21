@@ -149,24 +149,26 @@ class ShootHell : public ShootBehavior{
 	float incAngBull;
 	float incSpaceRad;
 	float incBull;
+	float currDelay;
 	float delaySpawn;
 	float delayFire;
 	float angStart;
 	float currAng;
 	float angEnd;
+	float fireTime;
 public:
-	ShootHell(float firing_rate, const sf::Color& bullet_color, int numCircles, int numRings, int numBulls, float incrementingSpace, float incBull, float delaySpawn)
+	ShootHell(float firing_rate, const sf::Color& bullet_color, int numCircles, int numRings, int numBulls, float incrementingSpace, float incBull, float delaySpawn,float fireTime)
 		: ShootBehavior(firing_rate, bullet_color), numCircles(numCircles), numRings(numRings), numBulls(numBulls),
-		incSpaceRad(incrementingSpace), incBull(incBull), delaySpawn(delaySpawn){
+		incSpaceRad(incrementingSpace), incBull(incBull), delaySpawn(delaySpawn),fireTime(fireTime){
 		circleAngle = 360.0f/numCircles;
 		incAngBull = 360.0f/numBulls;
 		fire = false;
-		currBull = 0;
-		currAng = 0;
+		currBull = 1;
+		currDelay = 0;
+		angStart = currAng = 180;
 		currRing = 0;
 		spawnTimer = 0;
 		fireTimer = 0;
-		angStart = 0;
 		angEnd = 360;
 		spawn = true;
 		delayFire = delaySpawn * numBulls * numRings;

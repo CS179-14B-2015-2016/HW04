@@ -108,16 +108,20 @@ void ShootHell::behave(sf::CircleShape& form, float dt) {
 	spawnTimer += dt;
 	fireTimer += dt;
 	if (spawnTimer >= delaySpawn && spawn) {
+		currDelay += dt;
 		sf::Vector2f enemypos = form.getPosition(); //center of the entire bullet pattern
+		currAng += incAngBull;
 		for (int i = 0; i < numCircles; i++) {
 			sf::Vector2f dirToCir(cos(i*circleAngle*DTR)*incSpaceRad*currRing, sin(i*circleAngle*DTR)*incSpaceRad*currRing);
 			sf::Vector2f centerCircle = enemypos + dirToCir;
-			sf::Vector2f dirToBull(cos(currBull*incAngBull*DTR)*incBull*currRing, sin(currBull*incAngBull*DTR)*incBull*currRing);
+			sf::Vector2f dirToBull(cos(currAng*DTR)*incBull*currRing, sin(currAng*DTR)*incBull*currRing);
 			sf::Vector2f centerBull = centerCircle + dirToBull;
+			sf::Vector2f dir = centerCircle - centerBull;
+			dir /= sqrt(dir.x * dir.x + dir.y + dir.y);
 			Bullet* temp = pool.getBullet();
 			MoveDelay* md = pool.getMDQ();
-			md->init(0, sf::Vector2f(1, 1));
-			md->setDelay(5);
+			md->init(Speeds::BULLET,dir);
+			md->setDelay(fireTime - (currDelay));
 			sf::Color c = Colors::EBULLET;
 			switch (currRing) {
 			case 1:
@@ -134,6 +138,17 @@ void ShootHell::behave(sf::CircleShape& form, float dt) {
 			em.enemyShoot(temp);
 		}
 		currBull++;
+		if (currAng >= angEnd) {
+			currAng = 0;
+			currDelay = 0;
+			currBull = 1;
+			currRing++;
+			if (currRing >= numRings + 1) {
+				spawn = false;
+			}
+		}
+
+		/*
 		if (currBull >= numBulls) {
 			currRing++;
 			currBull = 0;
@@ -141,6 +156,7 @@ void ShootHell::behave(sf::CircleShape& form, float dt) {
 				spawn = false;
 			}
 		}
+		*/
 	}	
 }
 
@@ -309,12 +325,13 @@ void EntityManager::handleInput() {
 
 void EntityManager::update(float dt) {
 	player->update(dt);
-	for (auto bullet : ebullets) {
-		bullet->update(dt);
-	}
 	for (auto enemy : enemies) {
 		enemy->update(dt);
 	}
+	for (auto bullet : ebullets) {
+		bullet->update(dt);
+	}
+
 }
 
 void EntityManager::logic() {
@@ -378,5 +395,5 @@ void EntityManager::resolveWallCollision() {
 void EntityManager::initialize() {
 	addPlayer(new Player(sf::Vector2f(window_width/2, window_height*3.0/4.0)));
 	pool.Init();
-	enemies.push_back(new Enemy(sf::Vector2f(window_width/2, window_height/3), new ShootHell(0.2,Colors::PBULLET,5,3,64,50,40,0.2f)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width/2, window_height/3), new ShootHell(0.2,Colors::PBULLET,5,3,64,50,40,0.2f,6)));
 }
