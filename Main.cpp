@@ -7,7 +7,7 @@ const double PI = std::acos(-1);
 const auto DTR = PI / 180;
 const auto window_height = 800;
 const auto window_width = 800;
-EntityManager em;
+EntityManager em(15);
 Pool pool;
 
 int main() {
@@ -237,8 +237,11 @@ void Player::renderScore(sf::RenderTarget& g) {
 
 /* Enemy */
 void Enemy::update(float dt) {
-	//rotate_behavior->behave(form, dt);
+	rotate_behavior->behave(form, dt);
 	shoot_behavior->behave(form, dt);
+}
+void Enemy::changeShootingBehavior(ShootBehavior* sb) {
+	shoot_behavior = sb;
 }
 
 /* Pool */
@@ -255,11 +258,9 @@ Bullet* Pool::getBullet() {
 void Pool::returnBullet(Bullet* bull) {
 	bQueue.push(bull);
 	if (auto move = dynamic_cast<MoveStraight*>(bull->move_behavior)) {
-		std::cout << "RETURN MSQ" << std::endl;
 		msQ.push(dynamic_cast<MoveStraight*>(bull->move_behavior));
 	}
 	else if (auto move = dynamic_cast<MoveDelay*>(bull->move_behavior)) {
-		std::cout << "RETURN MDQ" << std::endl;
 		mdQ.push(dynamic_cast<MoveDelay*>(bull->move_behavior));
 	}
 	bull->move_behavior = nullptr;
@@ -337,10 +338,17 @@ void EntityManager::handleInput() {
 }
 
 void EntityManager::update(float dt) {
-	player->update(dt);
-	for (auto enemy : enemies) {
-		enemy->update(dt);
+	
+	if (tTime >= switchPattern && !switched){
+		switched = true;
+		enemies->changeShootingBehavior(new ShootHell(0.2, Colors::PBULLET, 5, 3, 64, 50, 50, 0.2f, 6, 5));
 	}
+	else {
+		tTime += dt;
+	}
+	player->update(dt);
+	enemies->update(dt);
+
 	for (auto bullet : ebullets) {
 		bullet->update(dt);
 	}
@@ -361,14 +369,13 @@ void EntityManager::logic() {
 				pool.returnBullet(bullet);
 			}
 	}
-
+	/*
 	for (auto bullet : pbullets) {
-		for (auto enemy : enemies) {
-			if (circleCollision(*bullet, *enemy)) {
-				//damage enemy
-			}
+		if (circleCollision(*bullet, *enemies)) {
 		}
 	}
+	*/
+
 }
 
 void EntityManager::render(sf::RenderTarget& g) {
@@ -378,9 +385,8 @@ void EntityManager::render(sf::RenderTarget& g) {
 	for (auto bullet : ebullets) {
 		bullet->render(g);
 	}
-	for (auto enemy : enemies) {
-		enemy->render(g);
-	}
+	enemies->render(g);
+
 }
 
 void EntityManager::enemyShoot(Bullet* bull) {
@@ -408,5 +414,5 @@ void EntityManager::resolveWallCollision() {
 void EntityManager::initialize() {
 	addPlayer(new Player(sf::Vector2f(window_width/2, window_height*3.0/4.0)));
 	pool.Init();
-	enemies.push_back(new Enemy(sf::Vector2f(window_width/2, window_height/3), new ShootHell(0.2,Colors::PBULLET,5,3,64,50,50,0.2f,6,5)));
+	enemies = new Enemy(sf::Vector2f(window_width/2, window_height/3),new RotateConstantly(50),new ShootStraight(FiringRates::ENEMY,Colors::EBULLET));
 }

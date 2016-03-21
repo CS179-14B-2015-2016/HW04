@@ -251,11 +251,12 @@ private:
 	RotateBehavior* rotate_behavior;
 	
 public:
-	Enemy(const sf::Vector2f& start_pos, ShootBehavior* shoot_behavior) : Entity(start_pos, Radii::ENEMY, Colors::ENEMY), shoot_behavior(shoot_behavior) {
+	Enemy(const sf::Vector2f& start_pos, RotateBehavior* rotate_behavior, ShootBehavior* shoot_behavior) : Entity(start_pos, Radii::ENEMY, Colors::ENEMY), shoot_behavior(shoot_behavior), rotate_behavior(rotate_behavior) {
 		form.setOrigin(Radii::ENEMY, Radii::ENEMY);
 		form.setRotation(90.0);
 	}
 	void update(float dt) override;
+	void changeShootingBehavior(ShootBehavior* sb);
 };
 
 /* object pool */
@@ -284,11 +285,16 @@ private:
 	Player* player;
 	std::vector<Bullet*> pbullets;
 	std::vector<Bullet*> ebullets;
-	std::vector<Enemy*> enemies;
+	Enemy* enemies;
+	bool switched;
 	bool circleCollision(const Entity& c1, const Entity& c2);
-	
+	float switchPattern;
+	float tTime;
 public:
-	EntityManager() {}
+	EntityManager(float switchPattern): switchPattern(switchPattern) {
+		tTime = 0;
+		switched = false;
+	}
 	void addPlayer(Entity* player);
 	void enemyShoot(Bullet*);
 	void handleInput();
