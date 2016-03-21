@@ -36,7 +36,7 @@ namespace Colors {
 
 namespace Speeds { /* pixels per second */
 	const auto PLAYER = 200.0f;
-	const auto BULLET = 100.0f;
+	const auto EBULLET = 50.0f;
 	const auto ENEMY = 3.0f;
 }
 
@@ -142,36 +142,36 @@ class ShootHell : public ShootBehavior{
 	int currRing;
 	bool fire;
 	bool spawn;
+	bool phase1;
 	float circleAngle;
 	float spawnTimer;
 	float fireTimer;
-	float delayPerRing;
 	float incAngBull;
 	float incSpaceRad;
 	float incBull;
-	float currDelay;
+	float delayCompen;
 	float delaySpawn;
-	float delayFire;
 	float angStart;
 	float currAng;
 	float angEnd;
 	float fireTime;
+	float delayBetweenPhases;
 public:
-	ShootHell(float firing_rate, const sf::Color& bullet_color, int numCircles, int numRings, int numBulls, float incrementingSpace, float incBull, float delaySpawn,float fireTime)
+	ShootHell(float firing_rate, const sf::Color& bullet_color, int numCircles, int numRings, int numBulls, float incrementingSpace, float incBull, float delaySpawn,float fireTime, float delayBetweenPhases)
 		: ShootBehavior(firing_rate, bullet_color), numCircles(numCircles), numRings(numRings), numBulls(numBulls),
-		incSpaceRad(incrementingSpace), incBull(incBull), delaySpawn(delaySpawn),fireTime(fireTime){
+		incSpaceRad(incrementingSpace), incBull(incBull), delaySpawn(delaySpawn),fireTime(fireTime), delayBetweenPhases(delayBetweenPhases) {
 		circleAngle = 360.0f/numCircles;
 		incAngBull = 360.0f/numBulls;
 		fire = false;
 		currBull = 1;
-		currDelay = 0;
+		delayCompen = 0;
 		angStart = currAng = 180;
 		currRing = 0;
 		spawnTimer = 0;
 		fireTimer = 0;
 		angEnd = 360;
 		spawn = true;
-		delayFire = delaySpawn * numBulls * numRings;
+		phase1 = true;
 	}
 	void behave(sf::CircleShape& form, float dt) override;
 };
@@ -211,9 +211,9 @@ public:
 };
 
 class Bullet : public Entity {
-private:
-	MoveBehavior* move_behavior;
+	
 public:
+	MoveBehavior* move_behavior;
 	Bullet() : Entity(sf::Vector2f(0, 0), Radii::EBULLET, Colors::EBULLET) {}
 	~Bullet() {
 		delete move_behavior;

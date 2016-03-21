@@ -97,7 +97,7 @@ void ShootStraight::behave(sf::CircleShape& form, float dt) {
 		float rotation = form.getRotation();
 		sf::Vector2f direction(std::cos(rotation*PI/180), std::sin(rotation*PI/180));
 		Bullet* temp = pool.getBullet();
-		temp->init(form.getPosition(), new MoveStraight(Speeds::BULLET, Speeds::BULLET*dt*direction),Colors::EBULLET);//change this
+		temp->init(form.getPosition(), new MoveStraight(Speeds::EBULLET, Speeds::EBULLET*dt*direction),Colors::EBULLET);//change this
 		em.enemyShoot(temp);
 		timer = 0;
 	}
@@ -107,8 +107,8 @@ void ShootStraight::behave(sf::CircleShape& form, float dt) {
 void ShootHell::behave(sf::CircleShape& form, float dt) {
 	spawnTimer += dt;
 	fireTimer += dt;
-	if (spawnTimer >= delaySpawn && spawn) {
-		currDelay += dt;
+	if (spawnTimer >= delaySpawn && spawn && phase1) {//phase 1
+		delayCompen += dt;
 		sf::Vector2f enemypos = form.getPosition(); //center of the entire bullet pattern
 		currAng += incAngBull;
 		for (int i = 0; i < numCircles; i++) {
@@ -120,8 +120,8 @@ void ShootHell::behave(sf::CircleShape& form, float dt) {
 			dir /= sqrt(dir.x * dir.x + dir.y + dir.y);
 			Bullet* temp = pool.getBullet();
 			MoveDelay* md = pool.getMDQ();
-			md->init(Speeds::BULLET,dir);
-			md->setDelay(fireTime - (currDelay));
+			md->init(Speeds::EBULLET,dir);
+			md->setDelay(fireTime - (delayCompen));
 			sf::Color c = Colors::EBULLET;
 			switch (currRing) {
 			case 1:
@@ -140,24 +140,28 @@ void ShootHell::behave(sf::CircleShape& form, float dt) {
 		currBull++;
 		if (currAng >= angEnd) {
 			currAng = 0;
-			currDelay = 0;
+			delayCompen = 0;
 			currBull = 1;
 			currRing++;
 			if (currRing >= numRings + 1) {
+				currRing = 1;
 				spawn = false;
+				phase1 = false;
 			}
 		}
+	}
+	else if (spawnTimer >= delaySpawn && spawn && !phase1) {//phase 2
 
-		/*
-		if (currBull >= numBulls) {
-			currRing++;
-			currBull = 0;
-			if (currRing >= numRings + 1) {
-				spawn = false;
-			}
+
+	}
+	else {
+		delayCompen += dt;
+		if (delayCompen >= delayBetweenPhases) {
+			delayCompen = 0;
+			spawn = true;
+			phase1 = true;
 		}
-		*/
-	}	
+	}
 }
 
 
@@ -250,6 +254,15 @@ Bullet* Pool::getBullet() {
 
 void Pool::returnBullet(Bullet* bull) {
 	bQueue.push(bull);
+	if (auto move = dynamic_cast<MoveStraight*>(bull->move_behavior)) {
+		std::cout << "RETURN MSQ" << std::endl;
+		msQ.push(dynamic_cast<MoveStraight*>(bull->move_behavior));
+	}
+	else if (auto move = dynamic_cast<MoveDelay*>(bull->move_behavior)) {
+		std::cout << "RETURN MDQ" << std::endl;
+		mdQ.push(dynamic_cast<MoveDelay*>(bull->move_behavior));
+	}
+	bull->move_behavior = nullptr;
 }
 
 Enemy* Pool::getEnemy() {
@@ -376,7 +389,7 @@ void EntityManager::enemyShoot(Bullet* bull) {
 
 
 bool EntityManager::recycle(Bullet* bull) {
-	return (bull->getPos().x - bull->getRad() > window_width + 200) || (bull->getPos().x + bull->getRad() < -200) || (bull->getPos().y + bull->getRad() < -200) || (bull->getPos().y - bull->getRad() > window_height + 200);
+	return (bull->getPos().x - bull->getRad() > window_width + 50) || (bull->getPos().x + bull->getRad() < -50) || (bull->getPos().y + bull->getRad() < -50) || (bull->getPos().y - bull->getRad() > window_height + 50);
 }
 
 void EntityManager::resolveWallCollision() {
@@ -395,5 +408,5 @@ void EntityManager::resolveWallCollision() {
 void EntityManager::initialize() {
 	addPlayer(new Player(sf::Vector2f(window_width/2, window_height*3.0/4.0)));
 	pool.Init();
-	enemies.push_back(new Enemy(sf::Vector2f(window_width/2, window_height/3), new ShootHell(0.2,Colors::PBULLET,5,3,64,50,40,0.2f,6)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width/2, window_height/3), new ShootHell(0.2,Colors::PBULLET,5,3,64,50,50,0.2f,6,5)));
 }
