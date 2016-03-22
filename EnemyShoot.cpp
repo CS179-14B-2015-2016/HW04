@@ -2,9 +2,9 @@
 #include "EnemyShoot.h"
 #include "BulletStage.h"
 
-EnemyShoot EnemyShoot::getInstance(float dt) {
+EnemyShoot* EnemyShoot::getInstance(float dt) {
     static EnemyShoot shoot(dt);
-    return shoot;
+    return &shoot;
 }
 
 void EnemyShoot::operator() (BulletStage* stage, vec2f position) {

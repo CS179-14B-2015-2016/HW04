@@ -11,7 +11,7 @@ private:
     float time;
 public:
     BasicEnemyMove(): wait(0), direction(vec2f(1, 0)), time(3) {}
-    static BasicEnemyMove getInstance();
+    static BasicEnemyMove* getInstance();
     void operator() (Entity* ent, float dt) override;
 };
 

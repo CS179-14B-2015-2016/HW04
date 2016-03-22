@@ -12,7 +12,8 @@ Enemy::Enemy(BulletStage* stage):
     shoot(EnemyShoot::getInstance(shootGap)),
     position(stage->getPosition()+vec2f(0, -200)),
     dimension(vec2f(20, 30)), speed(50),
-    maxHP(1000)
+    maxHP(1000),
+    advanced(false)
 {
     this->stage = stage;
     remHP = maxHP;
@@ -32,11 +33,11 @@ void Enemy::update(float dt) {
     shootCount = std::min(shootGap, shootCount+dt);
     if(shootCount==shootGap)
     {
-        shoot(stage, position);
+        (*shoot)(stage, position);
         shootCount = 0;
     }
 
-    move(this, dt);
+    (*move)(this, dt);
     position = this->stage->clamp(position, dimension);
     showbox.setPosition(position);
 }
@@ -58,4 +59,13 @@ bool Enemy::checkCollission (const vec2f& position, const vec2f& dimension) cons
     float otherDist = dimension.x;
 
     return ((selfDist+otherDist)>dist);
+}
+
+ void Enemy::getDamaged(float d) {
+        remHP -= d;
+        if(remHP<0 && !advanced) {
+            advanced = true;
+            remHP = maxHP;
+            stage->clearBullets();
+        }
 }

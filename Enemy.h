@@ -12,12 +12,13 @@ private:
     float shootGap;
     float shootCount;
     BulletStage* stage;
-    EnemyShoot shoot;
-    BasicEnemyMove move;
+    ShootBehavior* shoot;
+    MoveBehavior* move;
     sf::RectangleShape showbox;
     sf::RectangleShape healthBar;
     vec2f position, dimension, direction;
     float speed, remHP, maxHP;
+    bool advanced;
 public:
     Enemy(BulletStage* stage);
     void update(float dt) override;
@@ -47,8 +48,9 @@ public:
     float getTotalHP() const {
         return maxHP;
     }
-    void getDamaged(float d) {
-        remHP -= d;
+    void getDamaged(float d);
+    bool isDead() const {
+        return (advanced && remHP<0);
     }
 };
 

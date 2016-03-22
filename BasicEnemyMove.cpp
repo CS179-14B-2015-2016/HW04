@@ -5,9 +5,9 @@
 #include <iostream>
 #include <algorithm>
 
-BasicEnemyMove BasicEnemyMove::getInstance() {
+BasicEnemyMove* BasicEnemyMove::getInstance() {
     static BasicEnemyMove move;
-    return move;
+    return &move;
 }
 
 void BasicEnemyMove::operator() (Entity* ent, float dt) {

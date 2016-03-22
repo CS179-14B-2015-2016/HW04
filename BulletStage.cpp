@@ -18,11 +18,7 @@ void BulletStage::reset() {
         delete player_bullet[0];
         player_bullet.erase(player_bullet.begin());
     }
-
-    while(enemy_bullet.size()>0) {
-        delete enemy_bullet[0];
-        enemy_bullet.erase(enemy_bullet.begin());
-    }
+    clearBullets();
 
     std::vector<PlayerBullet*> player_bullet;
     std::vector<EnemyBullet*> enemy_bullet;
@@ -38,7 +34,6 @@ void BulletStage::handleInput(const vec2i& mouse) {
 }
 
 void BulletStage::update(float dt) {
-    enemy.update(dt);
     player.update(dt);
 
     for(int i=0; i<player_bullet.size(); i++)
@@ -58,6 +53,8 @@ void BulletStage::update(float dt) {
             i--;
         }
     }
+
+    enemy.update(dt);
 
     bool died = false;
     bool deathRecorded = false;
@@ -90,12 +87,7 @@ void BulletStage::update(float dt) {
         }
     }
     if(deathRecorded)
-    {
-        while(enemy_bullet.size()>0) {
-            delete enemy_bullet[0];
-            enemy_bullet.erase(enemy_bullet.begin());
-        }
-    }
+        clearBullets();
 }
 
 void BulletStage::render(sf::RenderWindow& window) const {
@@ -130,4 +122,11 @@ void BulletStage::addPlayerBullet(PlayerBullet* pb) {
 
 void BulletStage::addEnemyBullet(EnemyBullet* pb) {
     enemy_bullet.push_back(pb);
+}
+
+void BulletStage::clearBullets() {
+    while(enemy_bullet.size()>0) {
+        delete enemy_bullet[0];
+        enemy_bullet.erase(enemy_bullet.begin());
+    }
 }

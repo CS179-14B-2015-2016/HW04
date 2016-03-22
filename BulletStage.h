@@ -29,12 +29,13 @@ public:
     vec2f clamp(const vec2f point, const vec2f dimension) const;
     void addPlayerBullet(PlayerBullet* pb);
     void addEnemyBullet(EnemyBullet* pb);
-    float getRemainingBossHP() const {
-        return enemy.getRemainingHP();
+    bool isBossDead() const {
+        return enemy.isDead();
     }
     float getDeathCount() const {
         return player.getDeathCount();
     }
+    void clearBullets();
 };
 
 #endif // BULLETSTAGE_H_INCLUDED

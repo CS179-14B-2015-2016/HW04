@@ -51,7 +51,7 @@ void GameState::update(float dt) {
     stage.update(dt);
     int deathCount = stage.getDeathCount();
     countText.setString(std::to_string(deathCount));
-    if(stage.getRemainingBossHP()<=0) {
+    if(stage.isBossDead()) {
         popSelf(1, countText.getString());
     }
 }
