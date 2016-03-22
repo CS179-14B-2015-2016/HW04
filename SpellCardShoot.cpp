@@ -83,7 +83,6 @@ void SpellCardShoot::operator() (BulletStage* stage, vec2f position) {
         bulletDeg[4] -= dt*(jumpRate-6);
         if(bulletDeg[4]<0) bulletDeg[4] += 360;
 
-        std::cout << "ge" << std::endl;
         sf::Color color(255, 255, 153);
         float speed = baseSpeed*1.10f;
         vec2f direction(0, -1);
@@ -95,7 +94,21 @@ void SpellCardShoot::operator() (BulletStage* stage, vec2f position) {
         }
     }
     if(percentage <= 0.20) {
+        float jumpRate = (360/2.0);
+        bulletDeg[5] += dt*(jumpRate+12);
+        if(bulletDeg[5]<0) bulletDeg[5] -= 360;
 
+        sf::Color color(153, 153, 255);
+        float speed = baseSpeed*1.20f;
+        float otherSpeed = speed*1.2;
+        vec2f direction(0, -1);
+        for(int i=0; i<5; i++) {
+            float deg = bulletDeg[5] - (i*dt*jumpRate);
+            if(deg > 360) deg += 360;
+            vec2f thisDir = rotate(direction, deg);
+            stage->addEnemyBullet(new BasicEnemyBullet(stage, position, thisDir,  vec2f(25, 25), speed, color));
+            stage->addEnemyBullet(new BasicEnemyBullet(stage, position, thisDir,  vec2f(25, 25), otherSpeed, color));
+        }
     }
     if(percentage <= 0.10) {
 
