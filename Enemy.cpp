@@ -7,7 +7,7 @@
 
 Enemy::Enemy(BulletStage* stage):
     Entity(stage),
-    shootGap(1/10.0),
+    shootGap(1/9.0),
     shootCount(0),
     move(BasicEnemyMove::getInstance()),
     shoot(EnemyShoot::getInstance(shootGap)),
@@ -33,7 +33,6 @@ void Enemy::update(float dt) {
         maxHP *= 3;
         remHP = maxHP;
         stage->clearBullets();
-        shootGap = 1/9.0;
         shoot = SpellCardShoot::getInstance(shootGap, this);
     }
 
