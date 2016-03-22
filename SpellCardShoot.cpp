@@ -20,13 +20,14 @@ void SpellCardShoot::operator() (BulletStage* stage, vec2f position) {
         bulletDeg[0] += dt*(jumpRate-18);
         if(bulletDeg[0]>360) bulletDeg[0] -= 360;
 
+        sf::Color color(102, 194, 255);
         float speed = baseSpeed;
         vec2f direction(0, -1);
         for(int i=0; i<7; i++) {
             float deg = bulletDeg[0] - (i*dt*jumpRate);
             if(deg<0) deg += 360;
             vec2f thisDir = rotate(direction, deg);
-            stage->addEnemyBullet(new BasicEnemyBullet(stage, position, thisDir,  vec2f(10, 10), speed, sf::Color::Blue));
+            stage->addEnemyBullet(new BasicEnemyBullet(stage, position, thisDir,  vec2f(8, 8), speed, color));
         }
     }
     if(percentage <= 0.90) {
