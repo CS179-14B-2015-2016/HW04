@@ -16,7 +16,7 @@ BasicPlayerBullet::BasicPlayerBullet(BulletStage* stage, vec2f position, vec2f d
 
     box.setSize(dimension);
     box.setOrigin(dimension/2.0f);
-    box.setFillColor(sf::Color::Red);
+    box.setFillColor(sf::Color(204, 0, 0));
     dimension = vec2f(10.6, 10.6);
 }
 
