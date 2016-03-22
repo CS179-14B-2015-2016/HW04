@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "PlayerMove.h"
 #include "PlayerShoot.h"
+#include "Enemy.h"
 
 class BulletStage;
 class Player: public Entity {
@@ -50,6 +51,7 @@ public:
     bool isInvul() {
         return invulTime>0;
     }
+    bool isTouchingEnemy(const Enemy& e) const;
 };
 
 #endif // PLAYER_H_INCLUDED

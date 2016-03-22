@@ -40,6 +40,7 @@ void BulletStage::handleInput(const vec2i& mouse) {
 void BulletStage::update(float dt) {
     enemy.update(dt);
     player.update(dt);
+
     for(int i=0; i<player_bullet.size(); i++)
     {
         PlayerBullet* pb = player_bullet[i];
@@ -60,6 +61,13 @@ void BulletStage::update(float dt) {
 
     bool died = false;
     bool deathRecorded = false;
+
+    if(player.isTouchingEnemy(enemy) && !player.isInvul()) {
+        died = true;
+        deathRecorded = true;
+        player.die();
+    }
+
     for(int i=0; i<enemy_bullet.size(); i++)
     {
         EnemyBullet* eb = enemy_bullet[i];
@@ -68,7 +76,7 @@ void BulletStage::update(float dt) {
         vec2f margin = eb->getDimension() * -2.0f;
 
         if(!deathRecorded) {
-            bool died = player.checkCollission(eb->getPosition(), eb->getDimension()) && !player.isInvul();
+            died = player.checkCollission(eb->getPosition(), eb->getDimension()) && !player.isInvul();
             if(died) {
                 deathRecorded = true;
                 player.die();

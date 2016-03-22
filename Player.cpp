@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "BulletStage.h"
 #include "PlayerMove.h"
+#include "Enemy.h"
 #include <iostream>
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
@@ -68,4 +69,17 @@ bool Player::checkCollission (const vec2f& position, const vec2f& dimension) con
     float otherDist = dimension.x/2;
 
     return ((selfDist+otherDist)>dist);
+}
+
+bool Player::isTouchingEnemy(const Enemy& e) const {
+    vec2f enemyPosition = e.getPosition();
+    vec2f enemyDimension = e.getDimension();
+    float actualDistance = mag(this->position-enemyPosition);
+
+    float selfDist = hitbox.getRadius()/2;
+    float enemySelfDistanceX = std::min(enemyPosition.x-enemyDimension.x/2.0f, std::max(this->position.x, enemyPosition.x+enemyDimension.x/2.0f));
+    float enemySelfDistanceY = std::min(enemyPosition.y-enemyDimension.y/2.0f, std::max(this->position.y, enemyPosition.y+enemyDimension.y/2.0f));
+    float enemySelfDistance = mag(vec2f(enemySelfDistanceX, enemySelfDistanceY) - enemyPosition);
+
+    return (actualDistance < enemySelfDistance+selfDist);
 }
