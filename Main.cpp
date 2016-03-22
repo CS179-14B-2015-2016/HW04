@@ -88,7 +88,7 @@ void Curtain::behave(sf::CircleShape& form, float dt) {
 			
 		}
 	}
-	if (timer >= 18) {
+	if (timer >= 15) {
 		timer = 0;
 	}
 }
@@ -298,27 +298,28 @@ void EntityManager::resolveWallCollision() {
 void EntityManager::initialize() {
 	addPlayer(new Player(sf::Vector2f(window_width / 2, window_height*3.0 / 4.0)));
 	pool.Init();
-
+	//Left Side
 	enemies.push_back(new Enemy(sf::Vector2f(5, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 1, 3), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(27, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 2, 4), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(49, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 3, 5), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(71, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 4, 6), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(93, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 5, 7), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(115, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 6, 8), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(137, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 7, 9), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(159, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 8, 10), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(181, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 9, 11), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(203, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 10, 12), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(225, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 11, 13), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(31, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 2, 4), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(57, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 3, 5), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(83, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 4, 6), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(109, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 5, 7), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(135, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 6, 8), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(161, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 7, 9), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(187, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 8, 10), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(213, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 9, 11), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(239, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 10, 12), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(265, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 11, 13), new RotateConstantly(0)));
+	//Right Side
 	enemies.push_back(new Enemy(sf::Vector2f(window_width - 5, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 1, 3), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 27, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 2, 4), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 49, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 3, 5), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 71, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 4, 6), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 93, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 5, 7), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 115, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 6, 8), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 137, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 7, 9), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 159, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 8, 10), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 181, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 9, 11), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 203, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 10, 12), new RotateConstantly(0)));
-	enemies.push_back(new Enemy(sf::Vector2f(window_width - 225, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 11, 13), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 31, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 2, 4), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 57, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 3, 5), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 83, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 4, 6), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 109, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 5, 7), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 135, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 6, 8), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 161, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 7, 9), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 187, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 8, 10), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 213, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 9, 11), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 239, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 10, 12), new RotateConstantly(0)));
+	enemies.push_back(new Enemy(sf::Vector2f(window_width - 265, 0), new Curtain(FiringRates::ENEMY, sf::Color::Transparent, 11, 13), new RotateConstantly(0)));
 }
