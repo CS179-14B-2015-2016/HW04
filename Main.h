@@ -24,27 +24,27 @@ namespace Colors {
 	const auto PLAYER = sf::Color::Blue;
 	const auto PBULLET = sf::Color::White;
 	const auto ENEMY = sf::Color::Red;
-	const auto EBULLET = sf::Color::Magenta;
+	const auto EBULLET = sf::Color::Yellow;
 	const auto ENEMYC = sf::Color::Transparent;
 
 }
 
 namespace Speeds { /* pixels per second */
 	const auto PLAYER = 200.0f;
-	const auto BULLET = 100.0f;
+	const auto BULLET = 120.0f;
 	const auto ENEMY = 3.0f;
 }
 
 namespace Radii {
 	const auto PLAYER = 10.0f;
 	const auto ENEMY = 15.0f;
-	const auto EBULLET = 10.0f;
+	const auto EBULLET = 12.0f;
 	const auto PBULLET = 5.0f;
 }
 
 namespace FiringRates {
 	const auto PLAYER = 5.0f;
-	const auto ENEMY = 10.0f;
+	const auto ENEMY = 5.0f;
 }
 
 namespace RotationalSpeeds {
