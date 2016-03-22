@@ -11,14 +11,22 @@ typedef vec2<int> vec2i;
 typedef vec2<float> vec2f;
 
 template<typename T>
-T operator*(const vec2<T> a, const vec2<T> b);
+inline T operator*(const vec2<T> a, const vec2<T> b) {
+    return (a.x*b.x) + (a.y*b.y);
+}
 
 template<typename T>
-T operator% (const vec2<T> a, const vec2<T> b);
+inline T operator% (const vec2<T> a, const vec2<T> b) {
+    return (a.x*b.y) - (a.y*b.x);
+}
 
-bool operator== (const vec2f a, const vec2f b);
+inline bool operator== (const vec2f a, const vec2f b) {
+    return (abs(a.x-b.x)<EPS) && (abs(a.y-b.y)<EPS);
+}
 
-bool operator== (const vec2i a, const vec2i b);
+inline bool operator== (const vec2i a, const vec2i b) {
+    return (a.x==b.x && a.y==b.y);
+}
 
 template<typename T>
 float mag(const vec2<T> a) {
