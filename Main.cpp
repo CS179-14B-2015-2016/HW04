@@ -175,7 +175,7 @@ void ShootRadialBurst::behave(sf::Transformable* form, float dt) {
 	timer += dt;
 	if (timer >= 1/firing_rate) {
 		for (float j = bullet_speed; j < bullet_speed + bullet_speed_increment*bullets_straight; j += bullet_speed_increment) {
-			for (float i = rotation + 180.0 - (360.0 - spread_angle)/2; i < rotation + 180.0 + (360.0 - spread_angle)/2; i += (360.0 - spread_angle)/bullets_radial) {
+			for (float i = rotation; i < rotation + 360.0; i += 360.0/bullets_radial) {
 				em.enemyShoot(position, new MoveAndBounce(j, sf::Vector2f(std::cos(i*PI/180), std::sin(i*PI/180)), bullet_radius));
 			}
 		}
@@ -183,13 +183,30 @@ void ShootRadialBurst::behave(sf::Transformable* form, float dt) {
 	}
 }
 
-/* Rotate Behaviors */
-void RotateConstantly::behave(sf::Transformable* form, float dt) {
-	form->rotate(rotational_speed*dt);
+void ShootCorkSign::behave(sf::Transformable* form, float dt) {
+	shoot1->behave(form, dt);
+	
+	float orig_rotation = form->getRotation();
+	
+	form->rotate(rotation*dt);
+	shoot2->behave(form, dt);
+	form->setRotation(orig_rotation);
+	
+	form->rotate(-rotation*dt);
+	shoot3->behave(form, dt);
+	form->setRotation(orig_rotation);
+	
+	
+	rotation += rotational_speed;
 }
 
+/* Rotate Behaviors */
 void RotateNone::behave(sf::Transformable* form, float dt) {
 	
+}
+
+void RotateConstantly::behave(sf::Transformable* form, float dt) {
+	form->rotate(rotational_speed*dt);
 }
 
 void RotateHoming::behave(sf::Transformable* form, float dt) {
@@ -263,9 +280,15 @@ void Player::renderScore(sf::RenderTarget& g) {
 
 /* Enemy */
 void Enemy::update(float dt) {
+	timer += dt;
+	
 	move_behavior->behave(&form, dt);
+	if (timer < 10) {
+		shoot_behaviors[0]->behave(&form, dt);
+	} else {
+		shoot_behaviors[1]->behave(&form, dt);
+	}
 	rotate_behavior->behave(&form, dt);
-	shoot_behavior->behave(&form, dt);
 }
 
 /* Pool */
@@ -377,18 +400,22 @@ bool EntityManager::recycle(Bullet* bullet) {
 }
 
 void EntityManager::resolveWallCollision() {
-	const auto player_pos = player->getPosition();
-	const auto player_rad = player->getRadius();
+	auto player_pos = player->getPosition();
+	auto player_rad = player->getRadius();
+	
+	if (player_pos.y + player_rad > window_height) {
+		player->setPosition(player_pos.x, window_height - player_rad);
+	} else if (player_pos.y - player_rad < 0) {
+		player->setPosition(player_pos.x, player_rad);
+	}
+	
+	player_pos = player->getPosition();
+	player_rad = player->getRadius();
 	
 	if (player_pos.x + player_rad > window_width) {
 		player->setPosition(window_width - player_rad, player_pos.y);
 	} else if (player_pos.x - player_rad < 0) {
 		player->setPosition(player_rad, player_pos.y);
-	}
-	if (player_pos.y + player_rad > window_height) {
-		player->setPosition(player_pos.x, window_height - player_rad);
-	} else if (player_pos.y - player_rad < 0) {
-		player->setPosition(player_pos.x, player_rad);
 	}
 }
 
@@ -397,12 +424,12 @@ void EntityManager::initialize() {
 	
 	pool.initialize();
 	
-	enemies.push_back(
+	/* enemies.push_back(
 		new Enemy(sf::Vector2f(window_width/2, window_height/4),
 		new MoveNowhere(),
-		new ShootRadialBurst(FiringRates::ENEMY, Speeds::BULLET, Colors::EBULLET, BulletBurstNumberRadial::ENEMY, BulletBurstNumberStraight::ENEMY, BulletSpeedIncrements::ENEMY, Radii::EBULLET, SpreadAngles::ENEMY),
+		new ShootRadialBurst(FiringRates::ENEMY, Speeds::BULLET, Colors::EBULLET, BulletBurstNumberRadial::ENEMY, BulletBurstNumberStraight::ENEMY, BulletSpeedIncrements::ENEMY, Radii::EBULLET),
 		new RotateNone())
-	);
+	); */
 	
 	/* enemies.push_back(
 		new Enemy(sf::Vector2f(window_width/2, window_height/4),
@@ -423,5 +450,33 @@ void EntityManager::initialize() {
 		new MoveNowhere(),
 		new ShootStraight(FiringRates::ENEMY, Speeds::BULLET, Colors::EBULLET),
 		new RotateHoming(RotationalSpeeds::ENEMY, player->getForm()))
+	); */
+	
+	std::vector<ShootBehavior*> enemy1;
+	enemy1.push_back(new ShootRadial(FiringRates::ENEMY, Speeds::BULLET, Colors::EBULLET, BulletBurstNumberRadial::ENEMY));
+	enemy1.push_back(new ShootCorkSign(
+		new ShootRadial(FiringRates::ENEMY_1, Speeds::BULLET_1, Colors::EBULLET, BulletBurstNumberRadial::ENEMY_1),
+		new ShootRadial(FiringRates::ENEMY_2, Speeds::BULLET_2, Colors::EBULLET, BulletBurstNumberRadial::ENEMY_2),
+		new ShootRadial(FiringRates::ENEMY_2, Speeds::BULLET_2, Colors::EBULLET, BulletBurstNumberRadial::ENEMY_2),
+		RotationalSpeeds::ENEMY_1
+	));
+	
+	enemies.push_back(
+		new Enemy(sf::Vector2f(window_width/2, window_height/4),
+		new MoveNowhere(),
+		enemy1,
+		new RotateConstantly(RotationalSpeeds::ENEMY))
+	);
+	
+	/* enemies.push_back(
+		new Enemy(sf::Vector2f(window_width/2, window_height/4),
+		new MoveNowhere(),
+		new ShootCorkSign(
+			new ShootRadial(FiringRates::ENEMY_1, Speeds::BULLET_1, Colors::EBULLET, BulletBurstNumberRadial::ENEMY_1),
+			new ShootRadial(FiringRates::ENEMY_2, Speeds::BULLET_2, Colors::EBULLET, BulletBurstNumberRadial::ENEMY_2),
+			new ShootRadial(FiringRates::ENEMY_2, Speeds::BULLET_2, Colors::EBULLET, BulletBurstNumberRadial::ENEMY_2),
+			RotationalSpeeds::ENEMY_1
+		),
+		new RotateNone())
 	); */
 }

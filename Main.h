@@ -29,7 +29,9 @@ namespace Colors {
 
 namespace Speeds { /* pixels per second */
 	const auto PLAYER = 200.0f;
-	const auto BULLET = 50.0f;
+	const auto BULLET = 110.0f;
+	const auto BULLET_1 = 70.0f;
+	const auto BULLET_2 = 110.0f;
 	const auto ENEMY = 200.0f;
 }
 
@@ -42,11 +44,14 @@ namespace Radii {
 
 namespace FiringRates { /* bullets per second */
 	const auto PLAYER = 5.0f;
-	const auto ENEMY = 0.2f;
+	const auto ENEMY = 10.0f;
+	const auto ENEMY_1 = 0.5f;
+	const auto ENEMY_2 = 4.0f;
 }
 
 namespace RotationalSpeeds {
-	const auto ENEMY = 45.0f;
+	const auto ENEMY = 40.0f;
+	const auto ENEMY_1 = 10.0f;
 }
 
 namespace BulletSpeedIncrements {
@@ -54,7 +59,9 @@ namespace BulletSpeedIncrements {
 }
 
 namespace BulletBurstNumberRadial {
-	const auto ENEMY = 50;
+	const auto ENEMY = 4;
+	const auto ENEMY_1 = 50;
+	const auto ENEMY_2 = 10;
 }
 
 namespace BulletBurstNumberStraight {
@@ -169,10 +176,9 @@ public:
 class ShootRadial : public ShootBehavior {
 private:
 	int bullets_radial;
-	float bullet_radius;
 	
 public:
-	ShootRadial(float firing_rate, float bullet_speed, const sf::Color& bullet_color, int bullets_radial, float bullet_radius) : ShootBehavior(firing_rate, bullet_speed, bullet_color), bullets_radial(bullets_radial), bullet_radius(bullet_radius) {}
+	ShootRadial(float firing_rate, float bullet_speed, const sf::Color& bullet_color, int bullets_radial) : ShootBehavior(firing_rate, bullet_speed, bullet_color), bullets_radial(bullets_radial) {}
 	void behave(sf::Transformable* form, float dt) override;
 };
 
@@ -205,10 +211,20 @@ private:
 	int bullets_straight;
 	float bullet_speed_increment;
 	float bullet_radius;
-	float spread_angle;
 	
 public:
-	ShootRadialBurst(float firing_rate, float bullet_speed, const sf::Color& bullet_color, int bullets_radial, int bullets_straight, float bullet_speed_increment, float bullet_radius, float spread_angle) : ShootBehavior(firing_rate, bullet_speed, bullet_color), bullets_radial(bullets_radial), bullets_straight(bullets_straight), bullet_speed_increment(bullet_speed_increment), bullet_radius(bullet_radius), spread_angle(spread_angle) {}
+	ShootRadialBurst(float firing_rate, float bullet_speed, const sf::Color& bullet_color, int bullets_radial, int bullets_straight, float bullet_speed_increment, float bullet_radius) : ShootBehavior(firing_rate, bullet_speed, bullet_color), bullets_radial(bullets_radial), bullets_straight(bullets_straight), bullet_speed_increment(bullet_speed_increment), bullet_radius(bullet_radius) {}
+	void behave(sf::Transformable* form, float dt) override;
+};
+
+class ShootCorkSign : public ShootBehavior {
+private:
+	ShootBehavior *shoot1, *shoot2, *shoot3;
+	float rotation;
+	float rotational_speed;
+
+public:
+	ShootCorkSign(ShootBehavior* shoot1, ShootBehavior* shoot2, ShootBehavior* shoot3, float rotational_speed) : shoot1(shoot1), shoot2(shoot2), shoot3(shoot3), rotation(0), rotational_speed(rotational_speed), ShootBehavior(0, 0, Colors::EBULLET) {}
 	void behave(sf::Transformable* form, float dt) override;
 };
 
@@ -277,18 +293,24 @@ public:
 class Enemy : public Entity {
 private:
 	MoveBehavior* move_behavior;
-	ShootBehavior* shoot_behavior;
+	// ShootBehavior* shoot_behavior;
+	std::vector<ShootBehavior*> shoot_behaviors;
 	RotateBehavior* rotate_behavior;
+	float timer;
 	
 public:
 	Enemy() : Entity(sf::Vector2f(0, 0), Radii::ENEMY, Colors::ENEMY) {}
-	Enemy(const sf::Vector2f& start_pos, MoveBehavior* move_behavior, ShootBehavior* shoot_behavior, RotateBehavior* rotate_behavior) : Entity(start_pos, Radii::ENEMY, Colors::ENEMY), move_behavior(move_behavior), shoot_behavior(shoot_behavior), rotate_behavior(rotate_behavior) {
+	/* Enemy(const sf::Vector2f& start_pos, MoveBehavior* move_behavior, ShootBehavior* shoot_behavior, RotateBehavior* rotate_behavior) : Entity(start_pos, Radii::ENEMY, Colors::ENEMY), move_behavior(move_behavior), shoot_behavior(shoot_behavior), rotate_behavior(rotate_behavior) {
+		form.setOrigin(Radii::ENEMY, Radii::ENEMY);
+		form.setRotation(90.0);
+	} */
+	Enemy(const sf::Vector2f& start_pos, MoveBehavior* move_behavior, std::vector<ShootBehavior*> shoot_behaviors, RotateBehavior* rotate_behavior) : Entity(start_pos, Radii::ENEMY, Colors::ENEMY), move_behavior(move_behavior), shoot_behaviors(shoot_behaviors), rotate_behavior(rotate_behavior), timer(0) {
 		form.setOrigin(Radii::ENEMY, Radii::ENEMY);
 		form.setRotation(90.0);
 	}
 	~Enemy() {
 		delete move_behavior;
-		delete shoot_behavior;
+		// delete shoot_behavior;
 		delete rotate_behavior;
 	}
 	void update(float dt) override;
