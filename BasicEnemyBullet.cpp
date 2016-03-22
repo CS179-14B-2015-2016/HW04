@@ -2,11 +2,11 @@
 #include "BulletStage.h"
 #include "Vector2Plus.h"
 
-BasicEnemyBullet::BasicEnemyBullet(BulletStage* stage, vec2f position, vec2f direction, float speed, sf::Color color):
+BasicEnemyBullet::BasicEnemyBullet(BulletStage* stage, vec2f position, vec2f direction, vec2f dimension, float speed, sf::Color color):
     EnemyBullet(stage),
     move(StraightMovement::getInstance()),
     position(position),
-    dimension(vec2f(10, 10)),
+    dimension(dimension),
     direction(direction),
     speed(speed)
     {

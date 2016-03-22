@@ -16,7 +16,7 @@ private:
     float speed, damage;
     sf::CircleShape bullet;
 public:
-    BasicEnemyBullet(BulletStage* stage, vec2f position, vec2f direction, float speed, sf::Color color);
+    BasicEnemyBullet(BulletStage* stage, vec2f position, vec2f direction, vec2f dimension, float speed, sf::Color color);
     void update(float dt) override;
     void draw(sf::RenderWindow& window) const override;
     virtual void setDirection(const vec2f direction) {

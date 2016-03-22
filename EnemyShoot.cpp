@@ -41,9 +41,9 @@ void EnemyShoot::operator() (BulletStage* stage, vec2f position) {
         vec2f actualGreenPos = rotate(basePos, greenAngle);
         vec2f actualGreenDir = rotate(baseDir, greenAngle);
 
-        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualBluePos, actualBlueDir, speed1, blue));
-        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualGreenPos, actualGreenDir, speed2, green));
-        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualBluePos, actualBlueDir, speed3, blue));
-        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualGreenPos, actualGreenDir, speed4, green));
+        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualBluePos, actualBlueDir, vec2f(10, 10), speed1, blue));
+        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualGreenPos, actualGreenDir, vec2f(10, 10), speed2, green));
+        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualBluePos, actualBlueDir, vec2f(10, 10), speed3, blue));
+        stage->addEnemyBullet(new BasicEnemyBullet(stage, position+actualGreenPos, actualGreenDir, vec2f(10, 10), speed4, green));
     }
 }

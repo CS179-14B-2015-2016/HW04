@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
+#include "SpellCardShoot.h"
 
 Enemy::Enemy(BulletStage* stage):
     Entity(stage),
@@ -27,6 +28,15 @@ Enemy::Enemy(BulletStage* stage):
 }
 
 void Enemy::update(float dt) {
+    if(remHP<0 && !advanced) {
+        advanced = true;
+        maxHP *= 3;
+        remHP = maxHP;
+        stage->clearBullets();
+        shootGap = 1/9.0;
+        shoot = SpellCardShoot::getInstance(shootGap, this);
+    }
+
     float ratioHP = (1.0f*remHP)/maxHP;
 
     healthBar.setSize(vec2f(480.0*ratioHP, 10));
@@ -63,9 +73,4 @@ bool Enemy::checkCollission (const vec2f& position, const vec2f& dimension) cons
 
  void Enemy::getDamaged(float d) {
         remHP -= d;
-        if(remHP<0 && !advanced) {
-            advanced = true;
-            remHP = maxHP;
-            stage->clearBullets();
-        }
 }
