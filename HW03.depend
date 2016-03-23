@@ -1,0 +1,362 @@
+# depslib dependency file v1.0
+1457548318 source:c:\users\aemiel\documents\github\hw03\splashstate.cpp
+	"StateSubclass.h"
+
+1457567267 c:\users\aemiel\documents\github\hw03\statesubclass.h
+	"StateManager.h"
+	"BulletStage.h"
+
+1457282222 c:\users\aemiel\documents\github\hw03\statemanager.h
+	<vector>
+	"State.h"
+	"Vector2Plus.h"
+
+1457282222 c:\users\aemiel\documents\github\hw03\state.h
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+
+1457282222 source:c:\users\aemiel\documents\github\hw03\state.cpp
+	"StateManager.h"
+
+1457282222 source:c:\users\aemiel\documents\github\hw03\statemanager.cpp
+	"StateManager.h"
+	<cassert>
+
+1457548318 source:c:\users\aemiel\documents\github\hw03\mainloop.cpp
+	"StateSubclass.h"
+	"Vector2Plus.h"
+	<iostream>
+
+1457566466 c:\users\aemiel\documents\github\hw03\vector2plus.h
+	<SFML/System.hpp>
+	<cmath>
+
+1457548318 source:c:\users\aemiel\documents\github\hw03\vector2plus.cpp
+	"Vector2Plus.h"
+
+1457576573 source:c:\users\aemiel\documents\github\hw03\bulletstage.cpp
+	"BulletStage.h"
+	<cmath>
+	<iostream>
+
+1457566466 c:\users\aemiel\documents\github\hw03\bulletstage.h
+	<vector>
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+	"Player.h"
+	"PlayerBullet.h"
+	"EnemyBullet.h"
+	"Enemy.h"
+
+1457567838 source:c:\users\aemiel\documents\github\hw03\gamestate.cpp
+	"StateSubclass.h"
+	<iostream>
+
+1457566466 c:\users\aemiel\documents\github\hw03\player.h
+	"Entity.h"
+	"PlayerMove.h"
+	"PlayerShoot.h"
+
+1457548318 c:\users\aemiel\documents\github\hw03\entity.h
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+	"MoveBehavior.h"
+	"ShootBehavior.h"
+	<iostream>
+
+1457548318 c:\users\aemiel\documents\github\hw03\movebehavior.h
+
+1457548318 c:\users\aemiel\documents\github\hw03\shootbehavior.h
+
+1457548318 source:c:\users\aemiel\documents\github\hw03\player.cpp
+	"Player.h"
+	"BulletStage.h"
+	"PlayerMove.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1457548318 c:\users\aemiel\documents\github\hw03\playermove.h
+	"MoveBehavior.h"
+
+1457548318 source:c:\users\aemiel\documents\github\hw03\playermove.cpp
+	"PlayerMove.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+
+1457566466 c:\users\aemiel\documents\github\hw03\playerbullet.h
+	"Entity.h"
+
+1457548318 source:c:\users\aemiel\documents\github\hw03\straightmovement.cpp
+	"StraightMovement.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+
+1457548318 c:\users\aemiel\documents\github\hw03\straightmovement.h
+	"MoveBehavior.h"
+
+1457566466 source:c:\users\aemiel\documents\github\hw03\basicplayerbullet.cpp
+	"BasicPlayerBullet.h"
+	"BulletStage.h"
+	"Vector2Plus.h"
+
+1457566466 c:\users\aemiel\documents\github\hw03\basicplayerbullet.h
+	"PlayerBullet.h"
+	"StraightMovement.h"
+	<SFML/Graphics.hpp>
+
+1457548318 c:\users\aemiel\documents\github\hw03\playershoot.h
+	"ShootBehavior.h"
+
+1457548318 source:c:\users\aemiel\documents\github\hw03\playershoot.cpp
+	"BasicPlayerBullet.h"
+	"PlayerShoot.h"
+	"BulletStage.h"
+
+1457577262 c:\users\aemiel\documents\github\hw03\enemy.h
+	"Entity.h"
+	"EnemyShoot.h"
+	"BasicEnemyMove.h"
+
+1457577192 source:c:\users\aemiel\documents\github\hw03\enemy.cpp
+	"Enemy.h"
+	"BulletStage.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1457566466 c:\users\aemiel\documents\github\hw03\enemyshoot.h
+	"ShootBehavior.h"
+
+1457566466 c:\users\aemiel\documents\github\hw03\enemybullet.h
+	"Entity.h"
+
+1457566466 source:c:\users\aemiel\documents\github\hw03\basicenemybullet.cpp
+	"BasicEnemyBullet.h"
+	"BulletStage.h"
+	"Vector2Plus.h"
+
+1457566466 c:\users\aemiel\documents\github\hw03\basicenemybullet.h
+	"EnemyBullet.h"
+	"StraightMovement.h"
+	<SFML/Graphics.hpp>
+
+1457566466 source:c:\users\aemiel\documents\github\hw03\enemyshoot.cpp
+	"BasicEnemyBullet.h"
+	"EnemyShoot.h"
+	"BulletStage.h"
+
+1457566466 source:c:\users\aemiel\documents\github\hw03\basicenemymove.cpp
+	"BasicEnemyMove.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+	<algorithm>
+
+1457566466 c:\users\aemiel\documents\github\hw03\basicenemymove.h
+	"MoveBehavior.h"
+	"Vector2Plus.h"
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\basicenemybullet.cpp
+	"BasicEnemyBullet.h"
+	"BulletStage.h"
+	"Vector2Plus.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\basicenemybullet.h
+	"EnemyBullet.h"
+	"StraightMovement.h"
+	<SFML/Graphics.hpp>
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\enemybullet.h
+	"Entity.h"
+
+1458660688 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\entity.h
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+	"MoveBehavior.h"
+	"ShootBehavior.h"
+	<iostream>
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\vector2plus.h
+	<SFML/System.hpp>
+	<cmath>
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\movebehavior.h
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\shootbehavior.h
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\straightmovement.h
+	"MoveBehavior.h"
+
+1458740836 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\bulletstage.h
+	<vector>
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+	"Player.h"
+	"PlayerBullet.h"
+	"EnemyBullet.h"
+	"Enemy.h"
+	"SimpleEnemy.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\player.h
+	"Entity.h"
+	"PlayerMove.h"
+	"PlayerShoot.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\playermove.h
+	"MoveBehavior.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\playershoot.h
+	"ShootBehavior.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\playerbullet.h
+	"Entity.h"
+
+1458740713 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\enemy.h
+	"Entity.h"
+	"EnemyShoot.h"
+	"BasicEnemyMove.h"
+
+1458709320 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\enemyshoot.h
+	"ShootBehavior.h"
+
+1458708596 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\basicenemymove.h
+	"MoveBehavior.h"
+	"Vector2Plus.h"
+
+1458709373 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\basicenemymove.cpp
+	"BasicEnemyMove.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+	<algorithm>
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\basicplayerbullet.cpp
+	"BasicPlayerBullet.h"
+	"BulletStage.h"
+	"Vector2Plus.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\basicplayerbullet.h
+	"PlayerBullet.h"
+	"StraightMovement.h"
+	<SFML/Graphics.hpp>
+
+1458742739 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\bulletstage.cpp
+	"BulletStage.h"
+	<cmath>
+	<iostream>
+
+1458742711 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\enemy.cpp
+	"Enemy.h"
+	"BulletStage.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1458742509 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\enemyshoot.cpp
+	"BasicEnemyBullet.h"
+	"EnemyShoot.h"
+	"BulletStage.h"
+	<cmath>
+
+1458667829 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\mainloop.cpp
+	"StateSubclass.h"
+	"Vector2Plus.h"
+	<iostream>
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\statesubclass.h
+	"StateManager.h"
+	"BulletStage.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\statemanager.h
+	<vector>
+	"State.h"
+	"Vector2Plus.h"
+
+1458584744 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\state.h
+	<SFML/Graphics.hpp>
+	"Vector2Plus.h"
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\player.cpp
+	"Player.h"
+	"BulletStage.h"
+	"PlayerMove.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\playershoot.cpp
+	"BasicPlayerBullet.h"
+	"PlayerShoot.h"
+	"BulletStage.h"
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\splashstate.cpp
+	"StateSubclass.h"
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\state.cpp
+	"StateManager.h"
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\statemanager.cpp
+	"StateManager.h"
+	<cassert>
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\straightmovement.cpp
+	"StraightMovement.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+
+1458584744 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\vector2plus.cpp
+	"Vector2Plus.h"
+
+1458641441 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\gamestate.cpp
+	"StateSubclass.h"
+	<iostream>
+
+1458641512 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\playermove.cpp
+	"PlayerMove.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+
+1458741035 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\simpleenemy.cpp
+	"SimpleEnemy.h"
+	"BulletStage.h"
+	<iostream>
+	<cstdlib>
+	<SFML/Graphics.hpp>
+
+1458711411 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\simpleenemy.h
+	"Entity.h"
+	"SimpleEnemyShoot.h"
+	"SimpleEnemyMovement.h"
+
+1458709408 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\simpleenemyshoot.h
+	"ShootBehavior.h"
+
+1458709500 c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\simpleenemymovement.h
+	"MoveBehavior.h"
+	"Vector2Plus.h"
+
+1458709515 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\simpleenemymovement.cpp
+	"SimpleEnemyMovement.h"
+	"Vector2Plus.h"
+	<SFML/Graphics.hpp>
+	"Entity.h"
+	<iostream>
+	<algorithm>
+
+1458710624 source:c:\users\lenovox230\desktop\school\college\third year\second sem\cs179.14b\bhell2\hw03-1\simpleenemyshoot.cpp
+	"BasicEnemyBullet.h"
+	"SimpleEnemyShoot.h"
+	"BulletStage.h"
+	<cmath>
+
